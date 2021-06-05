@@ -1,0 +1,354 @@
+{
+    "name": "SessionVars",
+    "label": "SessionVars",
+    "description": "",
+    "group": "com.automationanywhere",
+    "artifactName": "SessionVars",
+    "packageVersion": "1.2.4-20210524-183731",
+    "codeVersion": "1.2.4-20210524-183731",
+    "author": "",
+    "commands": [
+        {
+            "name": "GetBooleanVariable",
+            "label": "GetBooleanVariable",
+            "nodeLabel": "Get {{varName}} key",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.GetBooleanVariableCommand",
+            "icon": "pkg.svg",
+            "returnType": "BOOLEAN",
+            "returnSubtype": "UNDEFINED",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT"
+                }
+            ]
+        },
+        {
+            "name": "GetNumberVariable",
+            "label": "GetNumberVariable",
+            "nodeLabel": "Get {{varName}} key",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.GetNumberVariableCommand",
+            "icon": "pkg.svg",
+            "returnType": "NUMBER",
+            "returnSubtype": "UNDEFINED",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT"
+                }
+            ]
+        },
+        {
+            "name": "GetTextVariable",
+            "label": "GetTextVariable",
+            "nodeLabel": "Get {{varName}} key",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.GetTextVariableCommand",
+            "icon": "pkg.svg",
+            "returnType": "STRING",
+            "returnSubtype": "UNDEFINED",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT"
+                }
+            ]
+        },
+        {
+            "name": "SetBooleanVariable",
+            "label": "SetBooleanVariable",
+            "nodeLabel": "Set {{varName}} key to {{value}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetBooleanVariableCommand",
+            "icon": "pkg.svg",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "value",
+                    "label": "Value",
+                    "description": "Value",
+                    "type": "BOOLEAN",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "isConstant",
+                    "label": "Constante",
+                    "description": "Cria a variavel como uma constante",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": false,
+                        "type": "BOOLEAN"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SetNumberVariable",
+            "label": "SetNumberVariable",
+            "nodeLabel": "Set {{varName}} key to {{value}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetNumberVariableCommand",
+            "icon": "pkg.svg",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "value",
+                    "label": "Value",
+                    "description": "Value",
+                    "type": "NUMBER",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "isConstant",
+                    "label": "Constante",
+                    "description": "Cria a variavel como uma constante",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": false,
+                        "type": "BOOLEAN"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SetTextVariable",
+            "label": "SetTextVariable",
+            "nodeLabel": "Set {{varName}} key to {{value}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetTextVariableCommand",
+            "icon": "pkg.svg",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "description": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "value",
+                    "label": "Value",
+                    "description": "Value",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "isConstant",
+                    "label": "Constante",
+                    "description": "Cria a variavel como uma constante",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": false,
+                        "type": "BOOLEAN"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "conditionals": [
+        {
+            "name": "BooleanKey",
+            "label": "BooleanKey",
+            "description": "Se a key booleana \u00e9 verdadeira",
+            "nodeLabel": "BooleanKey: Check if {{varName}} key is {{value}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditional.BooleanKeyCondition",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                },
+                {
+                    "name": "value",
+                    "label": "Iqual \u00e0:",
+                    "description": "Compara ao valor determinado:",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": false,
+                        "type": "BOOLEAN"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "KeyExists",
+            "label": "KeyExists",
+            "description": "Verifica se a key existe",
+            "nodeLabel": "KeyExists: Check {{varName}} key",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditional.KeyExistsCondition",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                },
+                {
+                    "name": "value",
+                    "label": "condi\u00e7\u00e3o",
+                    "description": "True-> Existe | False-> N\u00e3o Existe",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": true,
+                        "type": "BOOLEAN"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "StringKey",
+            "label": "StringKey",
+            "description": "Compara uma varaivel de texto",
+            "nodeLabel": "StringKey:{{varName}} {{select}} {{compare}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditional.StringKeyCondition",
+            "attributes": [
+                {
+                    "name": "varName",
+                    "label": "Key",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                },
+                {
+                    "name": "select",
+                    "label": "Operador",
+                    "type": "SELECT",
+                    "defaultValue": {
+                        "string": "=",
+                        "type": "STRING"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "Igual a (=)",
+                            "value": "="
+                        },
+                        {
+                            "label": "Diferente de (\u2260)",
+                            "value": "\u2260"
+                        },
+                        {
+                            "label": "Inclui",
+                            "value": "in"
+                        },
+                        {
+                            "label": "N\u00e3o Inclui",
+                            "value": "not in"
+                        }
+                    ]
+                },
+                {
+                    "name": "compare",
+                    "label": "Valor de destino",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
