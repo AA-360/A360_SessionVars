@@ -13,6 +13,7 @@
 package com.automationanywhere.botcommand.samples.commands.conditional;
 
 import static com.automationanywhere.commandsdk.annotations.BotCommand.CommandType.Condition;
+import static com.automationanywhere.commandsdk.model.AttributeType.SELECT;
 import static com.automationanywhere.commandsdk.model.DataType.BOOLEAN;
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
 
@@ -26,6 +27,7 @@ import com.automationanywhere.commandsdk.annotations.Pkg;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.annotations.rules.VariableType;
 import com.automationanywhere.commandsdk.model.AttributeType;
+import com.automationanywhere.commandsdk.model.DataType;
 import org.ini4j.Ini;
 
 /**
@@ -49,10 +51,16 @@ public class NotKeyExists {
             @VariableType(STRING)
             @Pkg(label = "Key", default_value_type = STRING)
             @NotEmpty
-                    String varName
+                    String varName,
+            @Idx(index = "2", type = SELECT, options = {
+                    @Idx.Option(index = "2.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "2.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type
     ) {
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
 
         return !ut.variableExists(ini,varName) ;
     }

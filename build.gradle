@@ -30,7 +30,7 @@ configure(allprojects){
 		testNgVersion = '6.14.3'
 		loggerVersion = '2.10.0'
 		jnaVersion = '5.3.1'	
-		version '1.2.5'
+		version '1.3.1'
 	}
 	group "$groupName"
 
@@ -104,13 +104,19 @@ configure(allprojects){
 
 
 
-		
+		//implementation group: 'org.apache.commons.codec.digest', name: 'commons-dgst', version: '1+'
+		// https://mvnrepository.com/artifact/org.apache.commons/org.apache.commons.codec
+		//compile group: 'org.apache.commons', name: 'org.apache.commons.codec', version: '1+'
+		compile 'commons-codec:commons-codec:1.15'
+		compile group: 'org.jooq', name: 'jool', version: '0.9.3'
+
+
 		//Add below dependencies to compile the samples
 
 //		implementation group: 'net.java.dev.jna', name: 'jna-platform', version: "$jnaVersion"
 //		compile group: 'org.springframework', name: 'spring-jms', version: '5.0.2.RELEASE'
 //		compile group: 'org.apache.activemq', name: 'activemq-all', version: '5.15.0'
-//		compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+		compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
 //		// // https://mvnrepository.com/artifact/com.h2database/h2
 //		compile group: 'com.h2database', name: 'h2', version: '1.4.200'
 

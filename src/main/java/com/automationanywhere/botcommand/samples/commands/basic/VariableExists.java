@@ -17,8 +17,11 @@ import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.botcommand.samples.commands.utils.uteis;
 import com.automationanywhere.commandsdk.annotations.*;
+import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
+import com.automationanywhere.commandsdk.model.DataType;
 import org.ini4j.Ini;
 
+import static com.automationanywhere.commandsdk.model.AttributeType.SELECT;
 import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
 import static com.automationanywhere.commandsdk.model.DataType.BOOLEAN;
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
@@ -45,11 +48,17 @@ public class VariableExists {
     public BooleanValue action(
             @Idx(index = "1", type = TEXT)
             @Pkg(label = "Key",description = "Key")
-            String varName
+            String varName,
+            @Idx(index = "2", type = SELECT, options = {
+                    @Idx.Option(index = "2.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "2.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type
     ) {
 
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
 
         if(!ut.variableExists(ini,varName)){
             return new BooleanValue(false);

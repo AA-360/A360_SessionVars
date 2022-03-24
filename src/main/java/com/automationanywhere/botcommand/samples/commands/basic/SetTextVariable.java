@@ -34,10 +34,10 @@ import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
 
 @BotCommand
 @CommandPkg(label = "SetTextVariable",
+        node_label = "Set {{varName}} key to {{value}}",
         description = "",
         icon = "pkg.svg",
-        name = "SetTextVariable",
-        node_label = "Set {{varName}} key to {{value}}"
+        name = "SetTextVariable"
 )
 
 
@@ -53,14 +53,21 @@ public class SetTextVariable {
             @Pkg(label = "Value",description = "Value")
             @NotEmpty
             String value,
-            @Idx(index = "3", type = BOOLEAN)
+            @Idx(index = "3", type = SELECT, options = {
+                    @Idx.Option(index = "3.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "3.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type,
+            @Idx(index = "3.1.1", type = BOOLEAN)
             @Pkg(label = "Constante", description = "Cria a variavel como uma constante",default_value = "false",default_value_type = DataType.BOOLEAN)
             @NotEmpty
-            Boolean isConstant
+                    Boolean isConstant
     ) {
 
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
+        isConstant = type.equals("s")?isConstant:false;
 
         try{
             //======================VALIDANDO SE JA EXISTE============

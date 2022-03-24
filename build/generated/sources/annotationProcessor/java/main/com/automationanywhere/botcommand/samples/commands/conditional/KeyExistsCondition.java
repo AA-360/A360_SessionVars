@@ -6,7 +6,6 @@ import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.commandsdk.i18n.Messages;
 import com.automationanywhere.commandsdk.i18n.MessagesFactory;
-import java.lang.Boolean;
 import java.lang.ClassCastException;
 import java.lang.Object;
 import java.lang.String;
@@ -44,16 +43,48 @@ public final class KeyExistsCondition implements Condition {
 
     if(parameters.containsKey("value") && parameters.get("value") != null && parameters.get("value").get() != null) {
       convertedParameters.put("value", parameters.get("value").get());
-      if(convertedParameters.get("value") !=null && !(convertedParameters.get("value") instanceof Boolean)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","value", "Boolean", parameters.get("value").get().getClass().getSimpleName()));
+      if(convertedParameters.get("value") !=null && !(convertedParameters.get("value") instanceof String)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","value", "String", parameters.get("value").get().getClass().getSimpleName()));
       }
     }
     if(convertedParameters.get("value") == null) {
       throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","value"));
     }
+    if(convertedParameters.get("value") != null) {
+      switch((String)convertedParameters.get("value")) {
+        case "KeyExists" : {
+
+        } break;
+        case "KeyNotExists" : {
+
+        } break;
+        default : throw new BotCommandException(MESSAGES_GENERIC.getString("generic.InvalidOption","value"));
+      }
+    }
+
+    if(parameters.containsKey("type") && parameters.get("type") != null && parameters.get("type").get() != null) {
+      convertedParameters.put("type", parameters.get("type").get());
+      if(convertedParameters.get("type") !=null && !(convertedParameters.get("type") instanceof String)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","type", "String", parameters.get("type").get().getClass().getSimpleName()));
+      }
+    }
+    if(convertedParameters.get("type") == null) {
+      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","type"));
+    }
+    if(convertedParameters.get("type") != null) {
+      switch((String)convertedParameters.get("type")) {
+        case "s" : {
+
+        } break;
+        case "l" : {
+
+        } break;
+        default : throw new BotCommandException(MESSAGES_GENERIC.getString("generic.InvalidOption","type"));
+      }
+    }
 
     try {
-      boolean result = command.validate((String)convertedParameters.get("varName"),(Boolean)convertedParameters.get("value"));
+      boolean result = command.validate((String)convertedParameters.get("varName"),(String)convertedParameters.get("value"),(String)convertedParameters.get("type"));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {

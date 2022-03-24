@@ -18,9 +18,11 @@ import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.annotations.rules.VariableType;
 import com.automationanywhere.commandsdk.model.AttributeType;
+import com.automationanywhere.commandsdk.model.DataType;
 import org.ini4j.Ini;
 
 import static com.automationanywhere.commandsdk.annotations.BotCommand.CommandType.Condition;
+import static com.automationanywhere.commandsdk.model.AttributeType.SELECT;
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
 
 
@@ -63,10 +65,16 @@ public class StringKey {
             @VariableType(STRING)
             @Pkg(label = "Valor de destino", default_value_type = STRING)
             @NotEmpty
-            String compare
+            String compare,
+            @Idx(index = "4", type = SELECT, options = {
+                    @Idx.Option(index = "4.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "4.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type
     ) {
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
 
         //======================VALIDANDO SE JA EXISTE============
         if(!ut.variableExists(ini,varName)){

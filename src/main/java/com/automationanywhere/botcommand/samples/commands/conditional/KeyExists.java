@@ -13,6 +13,7 @@
 package com.automationanywhere.botcommand.samples.commands.conditional;
 
         import static com.automationanywhere.commandsdk.annotations.BotCommand.CommandType.Condition;
+        import static com.automationanywhere.commandsdk.model.AttributeType.SELECT;
         import static com.automationanywhere.commandsdk.model.DataType.BOOLEAN;
         import static com.automationanywhere.commandsdk.model.DataType.STRING;
 
@@ -42,7 +43,7 @@ package com.automationanywhere.botcommand.samples.commands.conditional;
 @BotCommand(commandType = Condition)
 @CommandPkg(label = "KeyExists", name = "KeyExists",
         description = "Verifica se a key existe",
-        node_label = "KeyExists: Check {{varName}} key"
+        node_label = "{{value}}: Check {{varName}} key"
 )
 public class KeyExists {
 
@@ -53,15 +54,23 @@ public class KeyExists {
             @Pkg(label = "Key", default_value_type = STRING)
             @NotEmpty
             String varName,
-            @Idx(index = "2", type = AttributeType.BOOLEAN)
-            @Pkg(label = "condição", description = "True-> Existe | False-> Não Existe",default_value = "true",default_value_type = DataType.BOOLEAN)
+            @Idx(index = "2", type = SELECT, options = {
+                    @Idx.Option(index = "2.1", pkg = @Pkg(label = "Existe", value = "KeyExists")),
+                    @Idx.Option(index = "2.2", pkg = @Pkg(label = "Não existe", value = "KeyNotExists"))})
+            @Pkg(label = "condição:", description = "", default_value = "KeyExists", default_value_type = DataType.STRING)
             @NotEmpty
-            Boolean value
+                    String value,
+            @Idx(index = "3", type = SELECT, options = {
+                    @Idx.Option(index = "3.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "3.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type
     ) {
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
 
-        return ut.variableExists(ini,varName) == value ;
+        return ut.variableExists(ini,varName) == value.equals("KeyExists") ;
     }
 
 }

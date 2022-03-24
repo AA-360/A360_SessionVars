@@ -20,8 +20,7 @@ import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.model.DataType;
 import org.ini4j.Ini;
 
-import static com.automationanywhere.commandsdk.model.AttributeType.BOOLEAN;
-import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
+import static com.automationanywhere.commandsdk.model.AttributeType.*;
 import static com.automationanywhere.commandsdk.model.DataType.LIST;
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
 //import MaskFormatter;
@@ -33,12 +32,12 @@ import static com.automationanywhere.commandsdk.model.DataType.STRING;
 @BotCommand
 @CommandPkg(
         label = "GetTextVariable",
+        node_label = "Get Text {{varName}} key",
         description = "",
         icon = "pkg.svg",
         name = "GetTextVariable",
         return_type = STRING,
-        return_required = true,
-        node_label = "Get {{varName}} key"
+        return_required = true
 )
 
 
@@ -48,11 +47,17 @@ public class GetTextVariable {
     public StringValue action(
             @Idx(index = "1", type = TEXT)
             @Pkg(label = "Key",description = "Key")
-            String varName
+            String varName,
+            @Idx(index = "2", type = SELECT, options = {
+                    @Idx.Option(index = "2.1", pkg = @Pkg(label = "Session", value = "s")),
+                    @Idx.Option(index = "2.2", pkg = @Pkg(label = "LocalStorage", value = "l"))})
+            @Pkg(label = "Rule:", description = "Session-> cleared each execution\n LocalStorage->keep its value on VM", default_value = "s", default_value_type = DataType.STRING)
+            @NotEmpty
+                    String type
     ) {
 
         uteis ut = new uteis();
-        Ini ini = ut.getIniFile();
+        Ini ini = ut.getIniFile(type);
 
         //======================VALIDANDO SE JA EXISTE============
         if(!ut.variableExists(ini,varName)){

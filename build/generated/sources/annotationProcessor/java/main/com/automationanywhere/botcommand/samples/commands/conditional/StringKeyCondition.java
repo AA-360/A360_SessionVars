@@ -78,8 +78,29 @@ public final class StringKeyCondition implements Condition {
       throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","compare"));
     }
 
+    if(parameters.containsKey("type") && parameters.get("type") != null && parameters.get("type").get() != null) {
+      convertedParameters.put("type", parameters.get("type").get());
+      if(convertedParameters.get("type") !=null && !(convertedParameters.get("type") instanceof String)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","type", "String", parameters.get("type").get().getClass().getSimpleName()));
+      }
+    }
+    if(convertedParameters.get("type") == null) {
+      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","type"));
+    }
+    if(convertedParameters.get("type") != null) {
+      switch((String)convertedParameters.get("type")) {
+        case "s" : {
+
+        } break;
+        case "l" : {
+
+        } break;
+        default : throw new BotCommandException(MESSAGES_GENERIC.getString("generic.InvalidOption","type"));
+      }
+    }
+
     try {
-      boolean result = command.validate((String)convertedParameters.get("varName"),(String)convertedParameters.get("select"),(String)convertedParameters.get("compare"));
+      boolean result = command.validate((String)convertedParameters.get("varName"),(String)convertedParameters.get("select"),(String)convertedParameters.get("compare"),(String)convertedParameters.get("type"));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {
