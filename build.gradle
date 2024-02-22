@@ -28,9 +28,9 @@ configure(allprojects){
 	ext {
 		groupName = 'com.automationanywhere'
 		testNgVersion = '6.14.3'
-		loggerVersion = '2.10.0'
+		loggerVersion = '2.17.2'
 		jnaVersion = '5.3.1'	
-		version '1.3.1'
+		version '2.0.5'
 	}
 	group "$groupName"
 
@@ -38,7 +38,8 @@ configure(allprojects){
 
 	compileJava.options.encoding = 'UTF-8'
 	compileTestJava.options.encoding = 'UTF-8'
-	
+
+
 	repositories {
 		mavenCentral()
 		jcenter()
@@ -90,18 +91,22 @@ configure(allprojects){
 		implementation group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
 		// https://mvnrepository.com/artifact/commons-io/commons-io
 		implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
-		implementation name: 'triggerlistener', version: '2+'
+		//implementation name: 'triggerlistener', version: '2+'
 		compileOnly name: 'command-annotations', version: '1+'
 		compileOnly name: 'bot-runtime', version: '1+'
 		compileOnly name: 'bot-api', version: '1+'
 		compileOnly name: 'common-security', version: '1+'
 		implementation name: 'i18n-api', version: '1+'
 		apt name: 'command-processor', version: '1+'
-		compileOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$loggerVersion"
+		//compileOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$loggerVersion"
+		implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+		implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
 		testImplementation "org.testng:testng:$testNgVersion"
 		testImplementation name: 'bot-runtime', version: '1+'
 		testImplementation name: 'bot-api', version: '1+'
 
+		implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
+		implementation group: 'net.java.dev.jna', name: 'jna-platform', version: "$jnaVersion"
 
 
 		//implementation group: 'org.apache.commons.codec.digest', name: 'commons-dgst', version: '1+'
@@ -112,6 +117,9 @@ configure(allprojects){
 
 
 		//Add below dependencies to compile the samples
+
+		compile group: 'org.ini4j', name: 'ini4j', version: '0.5.4'
+
 
 //		implementation group: 'net.java.dev.jna', name: 'jna-platform', version: "$jnaVersion"
 //		compile group: 'org.springframework', name: 'spring-jms', version: '5.0.2.RELEASE'

@@ -4,8 +4,8 @@
     "description": "",
     "group": "com.automationanywhere",
     "artifactName": "SessionVars",
-    "packageVersion": "1.3.1-20211102-131101",
-    "codeVersion": "1.3.1-20211102-131101",
+    "packageVersion": "2.0.5-20240221-205828",
+    "codeVersion": "2.0.5-20240221-205828",
     "author": "",
     "commands": [
         {
@@ -427,6 +427,49 @@
             ]
         },
         {
+            "name": "SetDefaultVariables",
+            "label": "SetDefaultVariables",
+            "description": "The Variables will be set as Constant on Session mode",
+            "nodeLabel": "Set default Variables",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetDefaultVariablesCommand",
+            "icon": "pkg.svg",
+            "attributes": [
+                {
+                    "name": "botName",
+                    "label": "BotName",
+                    "description": "BotName",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "mode",
+                    "label": "Mode",
+                    "description": "Mode",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "mainTask",
+                    "label": "MainTask",
+                    "description": "MainTask",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "SetListVariable",
             "label": "SetListVariable",
             "nodeLabel": "Set {{varName}} key to {{value}}",
@@ -449,6 +492,67 @@
                     "label": "Value",
                     "description": "Value",
                     "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "type",
+                    "label": "Rule:",
+                    "description": "Session-> cleared each execution\n LocalStorage->keep its value on VM",
+                    "type": "SELECT",
+                    "defaultValue": {
+                        "string": "s",
+                        "type": "STRING"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "Session",
+                            "value": "s",
+                            "attributes": [
+                                {
+                                    "name": "isConstant",
+                                    "label": "Constante",
+                                    "description": "Cria a variavel como uma constante",
+                                    "type": "BOOLEAN",
+                                    "defaultValue": {
+                                        "boolean": false,
+                                        "type": "BOOLEAN"
+                                    },
+                                    "rules": [
+                                        {
+                                            "name": "NOT_EMPTY"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "LocalStorage",
+                            "value": "l"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SetManyTextVariable",
+            "label": "SetManyTextVariable",
+            "nodeLabel": "Set many keys",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetManyTextVariableCommand",
+            "icon": "pkg.svg",
+            "attributes": [
+                {
+                    "name": "properties",
+                    "label": "keys",
+                    "type": "PROPERTIES",
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
@@ -987,6 +1091,29 @@
                     ]
                 }
             ]
+        }
+    ],
+    "variables": [
+        {
+            "name": "botName",
+            "label": "botName",
+            "description": "Returns BotName as a String",
+            "mainClass": "com.automationanywhere.botcommand.samples.variable.BotNameVariable",
+            "type": "STRING"
+        },
+        {
+            "name": "mainTask",
+            "label": "mainTask",
+            "description": "Returns MainTask as a String",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.variables.MainTaskVariable",
+            "type": "STRING"
+        },
+        {
+            "name": "mode",
+            "label": "mode",
+            "description": "Returns Mode as a String",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.variables.ModeVariable",
+            "type": "STRING"
         }
     ]
 }

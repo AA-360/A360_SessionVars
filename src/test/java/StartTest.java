@@ -1,4 +1,5 @@
 import com.automationanywhere.botcommand.data.Value;
+import com.automationanywhere.botcommand.data.model.property.Property;
 import com.automationanywhere.botcommand.samples.commands.basic.*;
 import com.automationanywhere.botcommand.samples.commands.conditional.ListKey;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -9,9 +10,7 @@ import javax.swing.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 import org.jooq.lambda.Unchecked;
 
@@ -19,6 +18,21 @@ import org.jooq.lambda.Unchecked;
 public class StartTest {
 
     @Test
+    public void prop(){
+        Set<Property> a = new HashSet<Property>();
+        a.add(new Property("hehe",new StringValue("Val1"),true));
+        a.add(new Property("hehe2",new StringValue("Val2"),true));
+        a.add(new Property("hehe3",new StringValue("Val3"),true));
+
+        SetManyTextVariable sm = new SetManyTextVariable();
+
+        sm.action(a,"s",true);
+
+
+
+    }
+
+
     public void teste(){
         Start a = new Start();
         SetTextVariable tv = new SetTextVariable();
@@ -41,15 +55,15 @@ public class StartTest {
         vals.add(new StringValue("ABC"));
 
         //a.action();
-        //tv.action("teste","meu texto aqui",false);
+        tv.action("teste","meu texto aqui","s",false);
         //tv.action("teste","meu texto aqui2",true);
         //bv.action("numero",1.56,true,"s");
         //bv.action("prod",false,true,"s");
         //bv.action("prod",false,"l",true);
         //lv.action("lista",vals,"l",true);
         //dlv.action("lista","OK","l");
-        alv.action("lista","NODK","l");
-        clv.action("lista","l");
+        //alv.action("lista","NODK","l");
+        //clv.action("lista","l");
 
 
         //this.alert(Double.toString(gn.action("numero").get()+1));
