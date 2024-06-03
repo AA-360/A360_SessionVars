@@ -4,8 +4,8 @@
     "description": "",
     "group": "com.automationanywhere",
     "artifactName": "SessionVars",
-    "packageVersion": "2.0.5-20240221-205828",
-    "codeVersion": "2.0.5-20240221-205828",
+    "packageVersion": "2.0.5-20240221-210557",
+    "codeVersion": "2.0.5-20240221-210557",
     "author": "",
     "commands": [
         {
@@ -430,7 +430,7 @@
             "name": "SetDefaultVariables",
             "label": "SetDefaultVariables",
             "description": "The Variables will be set as Constant on Session mode",
-            "nodeLabel": "Set default Variables",
+            "nodeLabel": "botName: {{botName}}, Mode: {{mode}}, MainTask: {{mainTask}}",
             "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.SetDefaultVariablesCommand",
             "icon": "pkg.svg",
             "attributes": [

@@ -28,7 +28,7 @@ import static com.automationanywhere.commandsdk.model.AttributeType.*;
 
 @BotCommand
 @CommandPkg(label = "SetDefaultVariables",
-        node_label = "Set default Variables",
+        node_label = "botName: {{botName}}, Mode: {{mode}}, MainTask: {{mainTask}}",
         description = "The Variables will be set as Constant on Session mode",
         icon = "pkg.svg",
         name = "SetDefaultVariables"
